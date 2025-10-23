@@ -5,7 +5,7 @@ import * as anchor from '@coral-xyz/anchor';
 import BN from 'bn.js';
 import { Metaplex } from '@metaplex-foundation/js';
 import 'dotenv/config';
-import idl from './idl.json' with { type: 'json' };
+// import idl from './idl.json' with { type: 'json' };
 import multer from 'multer';
 import { PinataSDK } from 'pinata';
 

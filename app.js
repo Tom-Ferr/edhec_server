@@ -5,16 +5,45 @@ import * as anchor from '@coral-xyz/anchor';
 import BN from 'bn.js';
 import { Metaplex } from '@metaplex-foundation/js';
 import 'dotenv/config';
+// import idl from './idl.json' with { type: 'json' };
 import multer from 'multer';
 import { PinataSDK } from 'pinata';
 
 // --- Constants ---
 const PORT = process.env.PORT || 3000;
+const RPC_URL = process.env.SOLANA_RPC_URL || 'https://api.devnet.solana.com';
+const PROGRAM_ID = process.env.PROGRAM_ID;
 
 // --- App setup ---
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// --- Solana setup ---
+const connection = new Connection(RPC_URL);
+// const wallet = anchor.Wallet.local();
+// const provider = new anchor.AnchorProvider(connection, wallet, { commitment: 'confirmed' });
+// anchor.setProvider(provider);
+// const PROGRAM_ID_PUBKEY = new PublicKey(PROGRAM_ID);
+
+// console.log(PROGRAM_ID_PUBKEY.toBase58())
+
+// --- IDL & Program ---
+// const program = new anchor.Program(idl, PROGRAM_ID_PUBKEY, provider);
+
+// --- Metaplex setup ---
+const metaplex = new Metaplex(connection);
+
+// --- Base constants ---
+const METADATA_SEED = 'metadata';
+const TOKEN_METADATA_PROGRAM_ID = new PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
+const COLLECTION_ID = 123456789;
+
+const toNumberBuffer = (number) => {
+  const buffer = Buffer.alloc(8);
+  buffer.writeBigUInt64LE(BigInt(number), 0);
+  return buffer;
+};
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.PINATA_JWT,

@@ -21,12 +21,10 @@ app.use(express.json());
 
 // --- Solana setup ---
 const connection = new Connection(RPC_URL);
-// const wallet = anchor.Wallet.local();
-// const provider = new anchor.AnchorProvider(connection, wallet, { commitment: 'confirmed' });
-// anchor.setProvider(provider);
+const wallet = anchor.Wallet.local();
+const provider = new anchor.AnchorProvider(connection, wallet, { commitment: 'confirmed' });
+anchor.setProvider(provider);
 // const PROGRAM_ID_PUBKEY = new PublicKey(PROGRAM_ID);
-
-// console.log(PROGRAM_ID_PUBKEY.toBase58())
 
 // --- IDL & Program ---
 // const program = new anchor.Program(idl, PROGRAM_ID_PUBKEY, provider);

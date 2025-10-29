@@ -5,7 +5,6 @@ import * as anchor from '@coral-xyz/anchor';
 import BN from 'bn.js';
 import { Metaplex } from '@metaplex-foundation/js';
 import 'dotenv/config';
-import idl from './secrets/idl.json' with { type: 'json' };
 import multer from 'multer';
 import { PinataSDK } from 'pinata';
 
@@ -36,6 +35,7 @@ anchor.setProvider(provider);
 const PROGRAM_ID_PUBKEY = new anchor.web3.PublicKey(PROGRAM_ID);
 
 // --- IDL & Program ---
+const idl = JSON.parse(process.env.IDL_JSON_STRING);
 const program = new anchor.Program(idl, PROGRAM_ID_PUBKEY);
 
 // --- Metaplex setup ---
